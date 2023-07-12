@@ -1,0 +1,35 @@
+.loader div {
+    background-color: rgb(163, 155, 155);
+    height: 50px;
+    width: 50px;
+    margin: 2px;
+    border-radius: 50%;
+    animation: load 1s linear infinite;
+}
+
+.loader div:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.loader div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loader div:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes load {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(0.6);
+    }    
+    80% {
+        transform: scale(0.8);
+    }
+}
