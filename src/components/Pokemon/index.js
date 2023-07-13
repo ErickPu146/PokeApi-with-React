@@ -16,7 +16,7 @@ const Pokemon = ({ pokemon }) => {
         </td>
       </tr>
     </>
-  );
+  ); 
 };
 
 export { Pokemon };

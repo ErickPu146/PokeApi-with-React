@@ -1,0 +1,10 @@
+.pokemon-logo {
+    width: 100%;
+}
+
+@media (min-width: 992px) and (max-width: 3000px) {
+  .pokemon-logo {
+    height: 18rem;
+    width: 75%;
+  }
+}

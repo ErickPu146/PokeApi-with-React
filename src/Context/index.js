@@ -8,6 +8,7 @@ const PokemonProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [pokemons, setPokemons] = useState([]);
   const [copyPokemons, setCopyPokemons] = useState([]);
+  const [error, setError] = useState(false)
   //   const navigate = useNavigate()
   const pokemonsList = [];
   let limit = 17;
@@ -21,6 +22,7 @@ const PokemonProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
 
   const fetchPokemons = async () => {
     for (let i = offset; i <= limit; i++) {
@@ -41,7 +43,7 @@ const PokemonProvider = ({ children }) => {
       const response = await api.get(`${pokemonName}`);
       setPokemons([response.data]);
     } catch (error) {
-      alert("no encontrado");
+      setError(true)
     }
   };
   
@@ -53,9 +55,11 @@ const PokemonProvider = ({ children }) => {
     <PokemonContext.Provider
       value={{
         loading,
+        setLoading,
         pokemons,
         searchPokemon,
         viewAllPokemons,
+        error,
       }}
     >
       {children}
