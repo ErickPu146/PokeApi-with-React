@@ -69,6 +69,7 @@ const PokemonProvider = ({ children }) => {
         searchPokemon,
         viewAllPokemons,
         error,
+        fetchPokemons,
       }}
     >
       {children}

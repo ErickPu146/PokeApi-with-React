@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { PokemonContext } from "../../Context";
 
 const SearchPokemon = () => {
-  const { searchPokemon, viewAllPokemons, pokemons} = useContext(PokemonContext);
+  const { searchPokemon, viewAllPokemons, pokemons, loading} = useContext(PokemonContext);
 
   const [pokemonName, setPokemonName] = useState("");
   const [searched, setSearched] = useState(false);
@@ -47,12 +47,13 @@ console.log(pokemons.length)
           aria-label="Search"
           size="lg"
           className="rounded-0 rounded-start"
+          disabled={loading}
         />
 
-        <Button size="lg" onClick={confirmSearh} className={`${searched && pokemonName === "" ? "d-none" : "d-block"} ${pokemonName.trim() !== "" ? "btn-success" : "btn-primary"} rounded-0 rounded-end d-flex`}>
+        <Button disabled={loading} size="lg" onClick={confirmSearh} className={`${searched && pokemonName === "" ? "d-none" : "d-block"} ${pokemonName.trim() !== "" ? "btn-success" : "btn-primary"} rounded-0 rounded-end d-flex`}>
           <i className="bi bi-search"></i>
         </Button>
-        <Button size="lg" onClick={returnPokemons} className={`${!searched || pokemonName !== ""  ? "d-none" : "d-block"} btn-primary rounded-0 rounded-end d-flex`}>
+        <Button disabled={loading} size="lg" onClick={returnPokemons} className={`${!searched || pokemonName !== ""  ? "d-none" : "d-block"} btn-primary rounded-0 rounded-end d-flex`}>
           <i className="bi bi-caret-left-fill"></i> <i className="bi bi-caret-left-fill"></i>
         </Button>
       </div>

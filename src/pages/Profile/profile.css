@@ -1,0 +1,12 @@
+.pokemon-info {
+  font-family: "Acme", sans-serif;
+  font-weight: bold;
+}
+.pokemon-name {
+  font-size: 4rem;
+}
+
+.img-responsive {
+  object-fit: cover;
+}
+

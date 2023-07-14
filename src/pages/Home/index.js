@@ -22,7 +22,6 @@ const Home = () => {
           <SearchPokemon />
         </header>
 
-
         <Table responsive striped bordered hover variant="primary">
           <thead>
             <tr>
@@ -34,13 +33,21 @@ const Home = () => {
               <th>Ver mas informacion</th>
             </tr>
           </thead>
-          {loading ? <PokemonsLoading /> : null}
+          {loading ? (
+            <tbody>
+              <tr>
+                <td colSpan={12} className="p-2">
+                  <PokemonsLoading />
+                </td>
+              </tr>
+            </tbody>
+          ) : null}
 
           {error === true ? (
-          <tbody>
-            <PokemonError />
-          </tbody>
-        ) : null}
+            <tbody>
+              <PokemonError />
+            </tbody>
+          ) : null}
 
           {!loading ? (
             <tbody>
