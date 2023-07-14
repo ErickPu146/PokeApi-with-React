@@ -3,24 +3,29 @@ import { Button, Form } from "react-bootstrap";
 import { PokemonContext } from "../../Context";
 
 const SearchPokemon = () => {
-  const { searchPokemon, viewAllPokemons, error } = useContext(PokemonContext);
+  const { searchPokemon, viewAllPokemons, pokemons} = useContext(PokemonContext);
 
   const [pokemonName, setPokemonName] = useState("");
   const [searched, setSearched] = useState(false);
 
-  useEffect(() => {
-    setSearched(false)
-  }, [error])
 
   const saveName = (text) => {
     setPokemonName(text.toLowerCase());
   };
 
-  const confirmSearh = () => {
+  const confirmSearh = async () => {
     if (pokemonName.trim() !== "") {
-      searchPokemon(pokemonName.trim());
+      const result = await searchPokemon(pokemonName.trim());
       setPokemonName("");
-      setSearched(true);
+      console.log("result", result)
+console.log(pokemons.length)
+
+      if(result === "ok" || pokemons.length === 1) {
+        setSearched(true);
+      } 
+      else {
+        setSearched(false)
+      }
     } else {
       setPokemonName("");
     }

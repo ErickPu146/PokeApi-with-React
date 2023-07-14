@@ -8,7 +8,7 @@ const PokemonProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [pokemons, setPokemons] = useState([]);
   const [copyPokemons, setCopyPokemons] = useState([]);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
   //   const navigate = useNavigate()
   const pokemonsList = [];
   let limit = 17;
@@ -20,9 +20,9 @@ const PokemonProvider = ({ children }) => {
       pokemonsList.push(response.data);
     } catch (error) {
       setLoading(false);
+      setError(true);
     }
   };
-
 
   const fetchPokemons = async () => {
     for (let i = offset; i <= limit; i++) {
@@ -35,18 +35,27 @@ const PokemonProvider = ({ children }) => {
 
   useEffect(() => {
     fetchPokemons();
-  }, [limit, offset]);
+  }, []);
+
+  const listSearchEvery = ["todos", "every", "everyone", "completos"];
 
   const searchPokemon = async (pokemonName) => {
-    console.log("name", pokemonName);
-    try {
-      const response = await api.get(`${pokemonName}`);
-      setPokemons([response.data]);
-    } catch (error) {
-      setError(true)
+    if (listSearchEvery.some((value) => value === pokemonName)) {
+      viewAllPokemons();
+    } else {
+      try {
+        const response = await api.get(`${pokemonName}`);
+        setPokemons([response.data]);
+        return "ok";
+      } catch (e) {
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 2000);
+      }
     }
   };
-  
+
   const viewAllPokemons = () => {
     setPokemons(copyPokemons);
   };

@@ -22,6 +22,7 @@ const Home = () => {
           <SearchPokemon />
         </header>
 
+
         <Table responsive striped bordered hover variant="primary">
           <thead>
             <tr>
@@ -35,17 +36,17 @@ const Home = () => {
           </thead>
           {loading ? <PokemonsLoading /> : null}
 
+          {error === true ? (
+          <tbody>
+            <PokemonError />
+          </tbody>
+        ) : null}
+
           {!loading ? (
             <tbody>
               {pokemons.map((pokemon) => (
                 <Pokemon key={pokemon.id} pokemon={pokemon} />
               ))}
-            </tbody>
-          ) : null}
-
-          {!!error ? (
-            <tbody>
-              <PokemonError />
             </tbody>
           ) : null}
         </Table>
