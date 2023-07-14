@@ -11,8 +11,8 @@ const Pokemon = ({ pokemon }) => {
         </td>
         <td>{pokemon.base_experience}</td>
         <td>{pokemon.weight}</td>
-        <td>
-          <Link to={`/profile/${pokemon.id}`} className="btn btn-primary">Ver mas</Link>
+        <td className="d-flex justify-content-center">
+          <Link to={`/profile/${pokemon.id}`} className="btn btn-warning"><i className="bi bi-info-lg"></i></Link>
         </td>
       </tr>
     </>

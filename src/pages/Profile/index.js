@@ -1,12 +1,32 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../Context/Api";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Carousel, Col, Container, Row } from "react-bootstrap";
 import { ReturnButton } from "../../components/ReturnButton";
 import { PokemonContext } from "../../Context";
 import { PokemonsLoading } from "../../components/PokemonsLoading";
 import "./profile.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+// ..
+AOS.init({
+  disable: false,
+  startEvent: "DOMContentLoaded",
+  initClassName: "aos-init",
+  animatedClassName: "aos-animate",
+  useClassNames: false,
+  disableMutationObserver: false,
+  debounceDelay: 50,
+  throttleDelay: 99,
 
+  offset: 120,
+  delay: 0,
+  duration: 400,
+  easing: "ease",
+  once: false,
+  mirror: false,
+  anchorPlacement: "top-bottom",
+});
 
 const Profile = () => {
   const { loading, setLoading } = useContext(PokemonContext);
@@ -35,43 +55,94 @@ const Profile = () => {
       ) : null}
 
       {!loading ? (
-        <Container className="my-5 text-center">
+        <Container
+          className="my-5 text-center"
+          data-aos="fade-up"
+          data-aos-offset="0"
+          data-aos-delay="10"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-mirror="true"
+          data-aos-once="false"
+          data-aos-anchor-placement="top-center"
+        >
           <ReturnButton />
-          <h1 className="pokemon-name pokemon-info">{pokemon.name}</h1>
+          <Row>
+            <Col
+              md={6}
+              data-aos="fade-left"
+              data-aos-offset="0"
+              data-aos-delay="15"
+              data-aos-duration="1500"
+              data-aos-easing="ease-in-out"
+              data-aos-mirror="true"
+              data-aos-once="false"
+              data-aos-anchor-placement="top-center"
+            >
+              <h1 className="pokemon-name pokemon-info">{pokemon.name}</h1>
 
-          <Card className="position-relative">
-            <div className="d-flex gap-2">
-              <Card.Img
-                variant="top"
-                src={pokemon.sprites?.front_default}
-                alt="image pokemon"
-              />
-              <Card.Img
-                variant="top"
-                src={pokemon.sprites?.back_default}
-                alt="image pokemon"
-              />
-              <Card.Img
-                variant="top"
-                src={pokemon.sprites?.front_shiny}
-                alt="image pokemon"
-              />
-              <Card.Img
-                variant="top"
-                src={pokemon.sprites?.back_shiny}
-                alt="image pokemon"
-              />
-            </div>
-
-            <Card.Body>
-              <Card.Title>Habilidades</Card.Title>
-              {pokemon.abilities?.map((element, index) => (
-                <p key={index}>
-                  {index + 1}. {element.ability.name}
-                </p>
-              ))}
-            </Card.Body>
-          </Card>
+              <Card border="warning" className="position-relative opacity-50">
+                <Card.Body>
+                  <Card.Title className="pokemon-info abilities mb-3">
+                    Habilidades
+                  </Card.Title>
+                  {pokemon.abilities?.map((element, index) => (
+                    <p key={index} className="content">
+                      {index + 1}. {element.ability.name}
+                    </p>
+                  ))}
+                  <Card.Title className="pokemon-info abilities mb-3">
+                    Experiencia base
+                  </Card.Title>
+                  <p className="content">{pokemon.base_experience}</p>
+                  <Card.Title className="pokemon-info abilities mb-3">
+                    Peso
+                  </Card.Title>
+                  <p className="content">{pokemon.weight}</p>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col
+              md={6}
+              className="d-flex justify-content-center position-relative"
+              data-aos="fade-right"
+              data-aos-offset="0"
+              data-aos-delay="15"
+              data-aos-duration="1500"
+              data-aos-easing="ease-in-out"
+              data-aos-mirror="true"
+              data-aos-once="false"
+              data-aos-anchor-placement="top-center"
+            >
+              {/* <img
+                src={pokemon.sprites?.other.dream_world.front_default}
+                className="img-responsive"
+              /> */}
+              <Carousel>
+                <Carousel.Item>
+                  <img
+                    className="w-100 img-responsive"
+                    src={pokemon.sprites?.other.dream_world.front_default}
+                    alt="Second slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="w-100 img-responsive"
+                    src={pokemon.sprites?.other.home.front_default}
+                    alt="Second slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="w-100 img-responsive"
+                    src={pokemon.sprites?.other.home.front_shiny}
+                    alt="Third slide"
+                  />
+                </Carousel.Item>
+              </Carousel>
+            </Col>
+          </Row>
         </Container>
       ) : null}
     </>

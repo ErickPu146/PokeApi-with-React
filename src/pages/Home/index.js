@@ -7,6 +7,7 @@ import { SearchPokemon } from "../../components/SearchPokemon";
 import PokemonLogo from "./images/International_Pokémon_logo.svg.png";
 import "./home.css";
 import { PokemonError } from "../../components/PokemonError";
+import { PaginationPokemon } from "../../components/Pagination";
 
 const Home = () => {
   const { loading, pokemons, error } = useContext(PokemonContext);
@@ -21,6 +22,8 @@ const Home = () => {
           <img src={PokemonLogo} className="pokemon-logo" />
           <SearchPokemon />
         </header>
+
+        <PaginationPokemon />
 
         <Table responsive striped bordered hover variant="primary">
           <thead>

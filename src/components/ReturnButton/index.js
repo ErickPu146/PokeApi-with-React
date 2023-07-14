@@ -21,7 +21,7 @@ const ReturnButton = () => {
 
   return (
     <>
-      <Button onClick={returnHome} size="lg" className="p-2 btn-primary d-flex">
+      <Button onClick={returnHome} size="lg" className="p-2 btn-warning d-flex">
         <i className="bi bi-caret-left-fill"></i>{" "}
         <i className="bi bi-caret-left-fill"></i>
       </Button>

@@ -9,10 +9,10 @@ const PokemonProvider = ({ children }) => {
   const [pokemons, setPokemons] = useState([]);
   const [copyPokemons, setCopyPokemons] = useState([]);
   const [error, setError] = useState(false);
+  const [offset, setOffset] = useState(1);
   //   const navigate = useNavigate()
   const pokemonsList = [];
-  let limit = 17;
-  let offset = 1;
+  let limit = 9;
 
   const fetchData = async (id) => {
     try {
@@ -25,7 +25,8 @@ const PokemonProvider = ({ children }) => {
   };
 
   const fetchPokemons = async () => {
-    for (let i = offset; i <= limit; i++) {
+    console.log(offset);
+    for (let i = offset; i <= offset + limit; i++) {
       await fetchData(i);
     }
     setLoading(false);
@@ -34,8 +35,8 @@ const PokemonProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchPokemons();
-  }, []);
+    fetchPokemons(offset, limit);
+  }, [offset]);
 
   const listSearchEvery = ["todos", "every", "everyone", "completos"];
 
@@ -60,6 +61,18 @@ const PokemonProvider = ({ children }) => {
     setPokemons(copyPokemons);
   };
 
+  console.log("offset", offset);
+
+  const backPage = () => {
+    setOffset(offset - 10);
+    setLoading(true);
+  };
+
+  const nextPage = () => {
+    setOffset(offset + 10);
+    setLoading(true);
+  };
+
   return (
     <PokemonContext.Provider
       value={{
@@ -70,6 +83,9 @@ const PokemonProvider = ({ children }) => {
         viewAllPokemons,
         error,
         fetchPokemons,
+        backPage,
+        nextPage,
+        offset,
       }}
     >
       {children}

@@ -2,11 +2,60 @@
   font-family: "Acme", sans-serif;
   font-weight: bold;
 }
+
 .pokemon-name {
-  font-size: 4rem;
+  font-size: 3rem;
+}
+
+.abilities {
+  font-size: 2rem;
+}
+.content {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .img-responsive {
-  object-fit: cover;
+  height: 100%;
+  width: 80%;
+  transition: 1s;
 }
 
+.img-responsive:hover {
+  transform: scale(1.04);
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .pokemon-name {
+    font-size: 4.5rem;
+  }
+  .abilities {
+    font-size: 2.5rem;
+  }
+  .content {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .img-responsive {
+    height: 100%;
+
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .pokemon-name {
+    font-size: 6.5rem;
+  }
+  .abilities {
+    font-size: 3rem;
+  }
+  .content {
+    font-weight: 600;
+  }
+  .img-responsive {
+    height: 100%;
+
+    width: 100%;
+  }
+}
